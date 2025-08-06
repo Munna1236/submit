@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Moving Button - Touch & PC</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: sans-serif;
+    }
+
+    #moveBtn {
+      position: absolute;
+      font-size: 16px;
+      cursor: pointer;
+     
+    }
+
+    input {
+      font-size: 16px;
+      padding: 5px;
+      margin-bottom: 20px;
+    }
+
+    #Para {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  Enter your password <input id="Input" type="password" placeholder="Type password">
+  <button id="moveBtn">Submit</button>
+  <h4 id="Para">Good luck!</h4>
+
+  <script>
+    const input = document.getElementById("Input");
+    const button = document.getElementById("moveBtn");
+    const para = document.getElementById("Para");
+
+    function moveButton() {
+      if (input.value !== "Iammunna") {
+        const btnWidth = button.offsetWidth;
+        const btnHeight = button.offsetHeight;
+
+        const maxX = window.innerWidth - btnWidth;
+        const maxY = window.innerHeight - btnHeight;
+
+        const randomX = Math.floor(Math.random() * maxX);
+        const randomY = Math.floor(Math.random() * maxY);
+
+        button.style.left = randomX + "px";
+        button.style.top = randomY + "px";
+      }
+    }
+
+    // Move on mouseover (PC)
+    button.addEventListener("mouseover", moveButton);
+
+    // Move on touchstart (Mobile)
+    button.addEventListener("touchstart", (e) => {
+      moveButton();
+      e.preventDefault(); // Prevents accidental clicks
+    });
+
+    // Check password on click
+    button.addEventListener("click", () => {
+      if (input.value === "Iammunna") {
+        para.innerText = "✅ Password is correct!";
+      } else {
+        para.innerText = "❌ Wrong password!";
+      }
+    });
+  </script>
+
+</body>
+</html>
