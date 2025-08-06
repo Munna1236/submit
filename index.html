@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Moving Button - Touch & PC</title>
   <style>
     body {
@@ -15,29 +16,60 @@
       align-items: center;
       justify-content: center;
       font-family: sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    input {
+      font-size: 16px;
+      padding: 10px;
+      margin-bottom: 20px;
+      width: 80%;
+      max-width: 300px;
+      box-sizing: border-box;
     }
 
     #moveBtn {
       position: absolute;
       font-size: 16px;
+      padding: 10px 20px;
       cursor: pointer;
-     
+      border: none;
+      background-color: #3498db;
+      color: white;
+      border-radius: 5px;
+      transition: background-color 0.3s;
     }
 
-    input {
-      font-size: 16px;
-      padding: 5px;
-      margin-bottom: 20px;
+    #moveBtn:active {
+      background-color: #2980b9;
     }
 
     #Para {
       margin-top: 20px;
+      text-align: center;
+      padding: 0 10px;
+    }
+
+    @media (max-width: 600px) {
+      #moveBtn {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
+
+      input {
+        font-size: 14px;
+      }
+
+      #Para {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
 
-  Enter your password <input id="Input" type="password" placeholder="Type password">
+  <label for="Input">Enter your password</label>
+  <input id="Input" type="password" placeholder="Type password" />
   <button id="moveBtn">Submit</button>
   <h4 id="Para">Good luck!</h4>
 
@@ -79,7 +111,26 @@
         para.innerText = "❌ Wrong password!";
       }
     });
-  </script>
 
+    // Ensure button starts in the center
+    window.addEventListener("load", () => {
+      const centerX = (window.innerWidth - button.offsetWidth) / 2;
+      const centerY = (window.innerHeight - button.offsetHeight) / 2;
+      button.style.left = centerX + "px";
+      button.style.top = centerY + "px";
+    });
+
+    // Adjust on resize
+    window.addEventListener("resize", () => {
+      const currentX = parseInt(button.style.left || 0);
+      const currentY = parseInt(button.style.top || 0);
+      const maxX = window.innerWidth - button.offsetWidth;
+      const maxY = window.innerHeight - button.offsetHeight;
+
+      // Keep button within screen bounds
+      if (currentX > maxX) button.style.left = maxX + "px";
+      if (currentY > maxY) button.style.top = maxY + "px";
+    });
+  </script>
 </body>
 </html>
