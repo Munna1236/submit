@@ -1,137 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Moving Button - Touch & PC</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      overflow: hidden;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    
-      font-family: sans-serif;
-      background-color: #f5f5f5;
-    }
-
-    input {
-      font-size: 16px;
-      padding: 10px;
-      margin-bottom: 20px;
-      width: 80%;
-      max-width: 300px;
-      box-sizing: border-box;
-    }
-
-    #moveBtn {
-      position: absolute;
-      font-size: 16px;
-      padding: 10px 20px;
-      cursor: pointer;
-      border: none;
-      background-color: #3498db;
-      color: white;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-    }
-
-    #moveBtn:active {
-      background-color: #2980b9;
-    }
-
-    #Para {
-      margin-top: 20px;
-      text-align: center;
-      padding: 0 10px;
-    }
-
-    @media (max-width: 600px) {
-      #moveBtn {
-        font-size: 14px;
-        padding: 8px 16px;
-      }
-
-      input {
-        font-size: 14px;
-      }
-
-      #Para {
-        font-size: 14px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .Btn{
+            position: absolute;
+            
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-
-  <label for="Input">Enter your password</label>
-  <input id="Input" type="password" placeholder="Type password" />
-  <button id="moveBtn">Submit</button>
-  <h4 id="Para">Good luck!</h4>
-
-  <script>
-    const input = document.getElementById("Input");
-    const button = document.getElementById("moveBtn");
-    const para = document.getElementById("Para");
-
-    function moveButton() {
-      if (input.value !== "Iammunna") {
-        const btnWidth = button.offsetWidth;
-        const btnHeight = button.offsetHeight;
-
-        const maxX = window.innerWidth - btnWidth;
-        const maxY = window.innerHeight - btnHeight;
-
-        const randomX = Math.floor(Math.random() * maxX);
-        const randomY = Math.floor(Math.random() * maxY);
-
-        button.style.left = randomX + "px";
-        button.style.top = randomY + "px";
-      }
-    }
-
-    // Move on mouseover (PC)
-    button.addEventListener("mouseover", moveButton);
-
-    // Move on touchstart (Mobile)
-    button.addEventListener("touchstart", (e) => {
-      moveButton();
-      e.preventDefault(); // Prevents accidental clicks
-    });
-
-    // Check password on click
-    button.addEventListener("click", () => {
-      if (input.value === "Iammunna") {
-        para.innerText = "✅ Password is correct!";
-      } else {
-        para.innerText = "❌ Wrong password!";
-      }
-    });
-
-    // Ensure button starts in the center
-    window.addEventListener("load", () => {
-      const centerX = (window.innerWidth - button.offsetWidth) / 2;
-      const centerY = (window.innerHeight - button.offsetHeight) / 2;
-      button.style.left = centerX + "px";
-      button.style.top = centerY + "px";
-    });
-
-    // Adjust on resize
-    window.addEventListener("resize", () => {
-      const currentX = parseInt(button.style.left || 0);
-      const currentY = parseInt(button.style.top || 0);
-      const maxX = window.innerWidth - button.offsetWidth;
-      const maxY = window.innerHeight - button.offsetHeight;
-
-      // Keep button within screen bounds
-      if (currentX > maxX) button.style.left = maxX + "px";
-      if (currentY > maxY) button.style.top = maxY + "px";
-    });
-  </script>
+    <label for="password">what is your password ??</label>
+    <input type="password">
+    <button id="btn" class="Btn">submite</button>
+    <script>
+        let btn = document.getElementById('btn');
+        btn.addEventListener('mouseover',function(){
+            let x = Math.random() * window.innerWidth - btn.clientWidth;
+            let y = Math.random() * window.innerHeight - btn.clientHeight;
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        });
+    </script>
 </body>
 </html>
-
